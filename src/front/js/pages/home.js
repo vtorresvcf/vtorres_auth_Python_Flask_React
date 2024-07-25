@@ -12,7 +12,6 @@ export const Home = () => {
 		<div>
 
 		
-			{(store.token || localStorage.getItem("token")) && ("Sesión Iniciada") }
 			<h1 className="text-center py-2">Bienvenido/@</h1>
 			{!isRegister ? (<Login setIsRegister={setIsRegister}/>): <Signup/>}
 			

@@ -37,7 +37,6 @@ const signup = () => {
   return (
     
     <div className='w-50 mx-auto'>
-        
      
      {error && (<button className="btn btn-warning w-100">Faltan datos por rellenar</button> ) }
         <h1 className='text-center'>Formulario de Registro</h1>

@@ -35,10 +35,7 @@ const login = ({setIsRegister}) => {
             actions.postLogin(formData)
             setRedir(true)   
         }
-        
-               
-           
-        
+            
     }
     
         
@@ -62,7 +59,7 @@ const login = ({setIsRegister}) => {
              <input type="submit" className="btn btn-primary my-4" value={"Iniciar sesión"}/>
          </form>
         
-             <p>No estás registrado? <button onClick={()=>setIsRegister(true)}>Registrarse</button></p>
+             <p>No estás registrado? <button className='btn btn-dark' onClick={()=>setIsRegister(true)}>Registrarse</button></p>
          
     
     </div>
