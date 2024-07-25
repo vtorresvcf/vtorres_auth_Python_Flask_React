@@ -17,22 +17,70 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
+			postSignup: async (formData) => {
+				try {
+					const res = await fetch(process.env.BACKEND_URL + "/api/signup",{
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(formData),
+					});
+	
+					const data = await res.json()
+					setStore(data)
+					localStorage.setItem('token', data.token)
+					return data
+				} catch (error) {
+					console.log('error:'+error)
+				}
+				
+			},
+
+			postLogin: async (formData)=>{
+				try {
+					const res = await fetch(process.env.BACKEND_URL + "/api/login",{
+						method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify(formData),
+					})
+						const data = await res.json()
+						setStore(data)
+						localStorage.setItem('token', data.token)
+						return data
+								
+				} catch (error) {
+					console.log('error:'+error)
+				}
+			},
+			postPrivate: async(token)=>{
+				try {
+					const res = await fetch(process.env.BACKEND_URL + "/api/private",{
+							headers: {
+								'Content-Type': 'application/json',
+								'Authorization': `Bearer ${token}`
+							},
+							body: JSON.stringify(formData),
+					})
+						if(res.status!=200) return false
+						const data = await res.json()
+						setStore(data)
+						localStorage.setItem('token', data.token)
+						return data
+								
+				} catch (error) {
+					console.log('error:'+error)
+				}
+			},
+			
+
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
 
-			getMessage: async () => {
-				try{
-					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-					const data = await resp.json()
-					setStore({ message: data.message })
-					// don't forget to return something, that is how the async resolves
-					return data;
-				}catch(error){
-					console.log("Error loading message from backend", error)
-				}
-			},
+			
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();

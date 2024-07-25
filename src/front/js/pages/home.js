@@ -1,26 +1,21 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
+import React, { useState,useContext } from "react";
 import "../../styles/home.css";
-
+import { Context } from "../store/appContext";
+import Signup from "../component/signup";
+import Login from "../component/login";
 export const Home = () => {
-	const { store, actions } = useContext(Context);
-
+	const [isRegister, setIsRegister] = useState(false)
+	
+	const {store} = useContext(Context)
+   
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">
-				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
-			</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://start.4geeksacademy.com/starters/react-flask">
-					Read documentation
-				</a>
-			</p>
+		<div>
+
+		
+			{(store.token || localStorage.getItem("token")) && ("Sesión Iniciada") }
+			<h1 className="text-center py-2">Bienvenido/@</h1>
+			{!isRegister ? (<Login setIsRegister={setIsRegister}/>): <Signup/>}
+			
 		</div>
 	);
 };

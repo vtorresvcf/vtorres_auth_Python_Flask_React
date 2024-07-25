@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+	const {store} = useContext(Context)
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container">
@@ -13,6 +15,8 @@ export const Navbar = () => {
 						<button className="btn btn-primary">Check the Context in action</button>
 					</Link>
 				</div>
+				{store.token || localStorage.getItem("token") ? "Estas logeado" : "No estas logeado"}
+				
 			</div>
 		</nav>
 	);
