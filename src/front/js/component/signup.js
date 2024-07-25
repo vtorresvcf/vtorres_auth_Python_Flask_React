@@ -1,11 +1,24 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Context } from "../store/appContext";
+import { useNavigate } from 'react-router-dom';
 const signup = () => {
-   
+    const navigate = useNavigate()
     const {store,actions} = useContext(Context)
     const [formData, setFormData] = useState({email:"", password:""})
     const [error, setError] = useState(false)
+    const [redir, setRedir] = useState(false)    
 	
+    useEffect(()=>{
+        if(redir) {
+            const timer = setTimeout(()=>{
+                navigate("/pageprivate")
+            },3000)
+            return () => clearTimeout(timer);
+        }
+            
+    },[redir])
+
+
     const handleOnChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
     }
@@ -16,13 +29,8 @@ const signup = () => {
             return 
         }
         else{
-            setError(false)
             actions.postSignup(formData)
-            if(store.success ){
-                setTimeout(() => {
-                    setActiveForm(false)
-                }, 3000);
-            }
+            setRedir(true)  
         }
         
     }

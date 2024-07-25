@@ -8,8 +8,19 @@ const login = ({setIsRegister}) => {
     const {store,actions} = useContext(Context)
     const [formData, setFormData] = useState({email:"", password:""})
     const [error, setError] = useState(false)
-    const [redirect, setRedirect] = useState()
-	
+    const [redir, setRedir] = useState(false)    
+    
+    useEffect(()=>{
+        if(redir) {
+            const timer = setTimeout(()=>{
+                navigate("/pageprivate")
+            },3000)
+            return () => clearTimeout(timer);
+        }
+        
+
+        
+    },[redir])
 
     const handleOnChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
@@ -22,26 +33,14 @@ const login = ({setIsRegister}) => {
         } else{
             
             actions.postLogin(formData)
-             if(store.success == true ){
-               
-                setRedirect(true)
-               
-             }
-            
+            setRedir(true)   
         }
         
                
            
         
     }
-    useEffect(()=>{
-        if(redirect == true){
-            setTimeout(()=>{
-                navigate("/pageprivate")
-            },2000)
-        }
-        
-    }, [redirect])
+    
         
   return (
     <div className='w-50 mx-auto'>

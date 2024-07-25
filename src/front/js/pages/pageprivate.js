@@ -8,7 +8,7 @@ const pageprivate = () => {
   const navigate = useNavigate()
 
   useEffect(()=>{
-    if ((localStorage.getItem('token') !== "") && (localStorage.getItem('token')!== undefined)) return navigate('/')
+    if ((localStorage.getItem('token') == "") && (localStorage.getItem('token')!== undefined)) return navigate('/')
     
   },[])
 
