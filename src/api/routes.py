@@ -22,8 +22,8 @@ def signup_user():
         return jsonify({'success':False, 'msg': 'Todos los campos son necesarios'})
     user_exist = User.query.filter_by(email=email).first()
     if user_exist:
-        return jsonify({'success':False,'msg': f'No se puede registrar, el email ya está registrado'}),400
-   
+        return jsonify({'success':False,'msg':'No se puede registrar, el email ya está registrado'}),400
+    
     new_user= User(email=email, password=password, is_active=True)
     db.session.add(new_user)
     db.session.commit()

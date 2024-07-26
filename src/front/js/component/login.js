@@ -18,8 +18,6 @@ const login = ({setIsRegister}) => {
             return () => clearTimeout(timer);
         }
         
-
-        
     },[redir])
 
     const handleOnChange = (e) => {
@@ -50,16 +48,16 @@ const login = ({setIsRegister}) => {
       <form onSubmit={handleSubmit}>
              <div className="form-group m y-4">
              <label className="my-1" htmlFor="email">Email:</label>
-             <input className="form-control" type="text" id="email" name="email" value={formData.email} onChange={handleOnChange} placeholder="Introduce el email.."/>
+             <input className="form-control" type="email" id="email" name="email" value={formData.email} onChange={handleOnChange} placeholder="Introduce el email.."/>
              </div>
              <div className="form-group">
              <label className="my-1" htmlFor="password">Password:</label>
              <input className="form-control" type="password" id="password" name="password" value={formData.password} onChange={handleOnChange} placeholder="Introduce el password.."/>
              </div>
-             <input type="submit" className="btn btn-primary my-4" value={"Iniciar sesión"}/>
+             <input type="submit" className="btn btn-primary my-4 w-100" value={"Iniciar sesión"}/>
          </form>
-        
-             <p>No estás registrado? <button className='btn btn-dark' onClick={()=>setIsRegister(true)}>Registrarse</button></p>
+            <div className='d-flex justify-content-around'> <p>No estás registrado?? </p> <button className='btn btn-dark' onClick={()=>setIsRegister(true)}>Registrarse</button></div>
+            
          
     
     </div>

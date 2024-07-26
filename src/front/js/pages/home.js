@@ -12,8 +12,8 @@ export const Home = () => {
 		<div>
 
 		
-			<h1 className="text-center py-2">Bienvenido/@</h1>
-			{!isRegister ? (<Login setIsRegister={setIsRegister}/>): <Signup/>}
+			<h1 className="text-center py-2">Bienvenid@</h1>
+			{!isRegister ? (<Login setIsRegister={setIsRegister}/>): <Signup setIsRegister={setIsRegister}/>}
 			
 		</div>
 	);

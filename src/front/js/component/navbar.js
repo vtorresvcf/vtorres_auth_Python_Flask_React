@@ -27,9 +27,10 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1">Home</span>
 				</Link>
 
-				<button onClick={logOutRedirect}>LogOut</button>
+				
 				
 				{store.token || localStorage.getItem("token") ? "Sesión iniciada" : "Tienes que iniciar sesión"}
+				<button className="btn btn-dark" onClick={logOutRedirect}>LogOut</button>
 				
 			</div>
 		</nav>
