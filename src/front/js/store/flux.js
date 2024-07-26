@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			
+			reset:"",
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -64,7 +64,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			logOut: () =>{
 				localStorage.removeItem("token")
-				setStore("")
+				setStore({msg:"", token:"", success:"", user:""})
 				return true
 			}
 			
