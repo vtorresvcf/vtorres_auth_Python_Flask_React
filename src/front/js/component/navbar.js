@@ -1,15 +1,33 @@
-import React, {useContext} from "react";
-import { Link } from "react-router-dom";
+import React, {useContext, useState,useEffect} from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
-	const {store} = useContext(Context)
+	const {store,actions} = useContext(Context)
+	const [token, setToken] = useState("")
+	const navigate = useNavigate()
+
+	useEffect(()=>{
+		
+		if ((localStorage.getItem('token') !== "") && (localStorage.getItem('token')!== undefined)){
+		setToken(localStorage.getItem('token'))
+		}
+		
+	},[token])
+
+	const logOutRedirect = () =>{
+		actions.logOut()
+		navigate("/")
+	}
+
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container">
 				<Link to="/">
 					<span className="navbar-brand mb-0 h1">Home</span>
 				</Link>
+
+				<button onClick={logOutRedirect}>LogOut</button>
 				
 				{store.token || localStorage.getItem("token") ? "Sesión iniciada" : "Tienes que iniciar sesión"}
 				

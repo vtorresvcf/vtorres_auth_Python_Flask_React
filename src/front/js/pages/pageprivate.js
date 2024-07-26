@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useEffect,useState} from 'react'
 
 
 import { useNavigate } from 'react-router-dom';
@@ -6,11 +6,14 @@ import { useNavigate } from 'react-router-dom';
 //pendiente PWC PAGINA PRIVADA, ARREGLAR SESION LOGIN Y OPCION DE QUITAR TOKEN
 const pageprivate = () => {
   const navigate = useNavigate()
-
+  const [token, setToken] = useState("")
   useEffect(()=>{
-    if ((localStorage.getItem('token') == "") && (localStorage.getItem('token')!== undefined)) return navigate('/')
-    
-  },[])
+    if ((localStorage.getItem('token') == "") || (localStorage.getItem('token')== undefined)){
+      return navigate('/')
+    }  else {
+      setToken(localStorage.getItem('token'))
+    }
+  },[token])
 
   return (
     <div>
