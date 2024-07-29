@@ -53,8 +53,9 @@ def page_private():
     return jsonify({'success': False, 'msg': 'No estás logeado'})
 
 @api.route('/token', methods=['GET'])
+@jwt_required()
 def token():
-
+    
     user_id= get_jwt_identity
     user = User.query.get(user_id)
     if user:
