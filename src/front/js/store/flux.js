@@ -24,6 +24,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				
 			},
+			checkToken: async(token) => {
+				try{
+					const resp = await fetch(process.env.BACKEND_URL + "/api/token", {
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': `Bearer ${token}`
+						},
+						method: 'GET',
+					})
+					if (resp.status!=200) return false
+					const data = await resp.json()
+					console.log(data)
+					return data;
+				}catch(error){
+					console.log("Error loading message from backend", error)
+				}
+			},
 
 			postLogin: async (formData)=>{
 				try {

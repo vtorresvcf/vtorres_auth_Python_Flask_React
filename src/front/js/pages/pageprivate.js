@@ -1,19 +1,21 @@
-import React, { useEffect,useState} from 'react'
+import React, { useEffect,useState, useContext} from 'react'
+import { Context } from "../store/appContext";
 
 
 import { useNavigate } from 'react-router-dom';
 
-//pendiente PWC PAGINA PRIVADA, ARREGLAR SESION LOGIN Y OPCION DE QUITAR TOKEN
+
 const pageprivate = () => {
+  const {actions} = useContext(Context)
   const navigate = useNavigate()
-  const [token, setToken] = useState("")
-  useEffect(()=>{
-    if ((localStorage.getItem('token') == "") || (localStorage.getItem('token')== undefined)){
-      return navigate('/')
-    }  else {
-      setToken(localStorage.getItem('token'))
+  const checkToken = async () => {
+    const status = await actions.checkToken(localStorage.getItem('token'))
+    if (!status.success) navigate('/')
     }
-  },[token])
+
+  useEffect(()=>{
+    checkToken()
+  },[])
 
   return (
     <div>

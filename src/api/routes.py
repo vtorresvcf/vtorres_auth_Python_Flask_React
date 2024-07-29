@@ -52,5 +52,14 @@ def page_private():
         return jsonify({'success': True, 'msg': 'Has logrado entrar a una página privada'})
     return jsonify({'success': False, 'msg': 'No estás logeado'})
 
+@api.route('/token', methods=['GET'])
+def token():
+
+    user_id= get_jwt_identity
+    user = User.query.get(user_id)
+    if user:
+        return jsonify({'success': 'oK', 'msg': user.serialize()}),200
+    return jsonify({'success':'No ok', 'msg': 'No es correcto el token enviado' })
+
 if __name__ == '__main__':
     api.run(host='0.0.0.0', port=3245, debug=True)
